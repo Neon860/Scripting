@@ -5,25 +5,24 @@ using UnityEngine.UIElements;
 
 public class NewBehaviourScript : MonoBehaviour
 {
-    //Здоровьн NCP
+    //Г‡Г¤Г®Г°Г®ГўГјГ­ NCP
     int health = 5;
 
-    //Уровень NCP
+    //Г“Г°Г®ГўГҐГ­Гј NCP
     int level = 1;
 
-    //Cкорость NCP
+    //CГЄГ®Г°Г®Г±ГІГј NCP
     float speed = 1.5f;
     void Start()
     {
-        Vector3 newPosition = transform.position;
-        newPosition.z += speed * Time.deltaTime;
-        transform.position = newPosition;
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        Vector3 newPosition = transform.position;
+        newPosition.z += speed * Time.deltaTime;
+        transform.position = newPosition;
     }
 }
