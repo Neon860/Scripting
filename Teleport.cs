@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class Teleport : MonoBehaviour
 {
-    public Transform Teleport_Point;
-    void OnTriggerStay (Collider other)
+    public float speedFactor = 2.5f;
+    void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player")
-        {
-            other.transform.position = Teleport_Point.transform.position;
-        }
+        other.GetComponent<FirstPersonMovement>().runSpeed *= speedFactor;
+    }
+
+    void OnTriggerExit(Collider Other)
+    {
+        Other.GetComponent<FirstPersonMovement>().runSpeed /= speedFactor;
     }
 }
