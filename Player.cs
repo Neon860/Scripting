@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    private int health = 10;
+    public int health = 10;
+    public int maxHealth = 10;
     public GameObject fireballPrefab;
     public Transform attackPoint;
     private int coins;
