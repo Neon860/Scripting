@@ -2,29 +2,37 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class Timer : MonoBehaviour
 {
-    public int minubes;
-    public float secends;
+    public int minutes;
+    public float seconds;
+    public TextMeshProUGUI timerText;
 
-    // Update is called once per frame
+    // Цикл обновления составляет примерно 0.01 секунды
     void Update()
     {
-        secends -= Time.deltaTime;
-        if (secends == 0)
+        seconds -= Time.deltaTime;
+
+        if (seconds <= 0)
         {
-            if (secends <= 0)
+            if (minutes > 0)
             {
-                int sceneIndex = SceneManager.GetActiveScene().buildIndex;
-                SceneManager.LoadScene(sceneIndex);
+                seconds += 59;
+
+                minutes--;
             }
             else
             {
-                secends += 59;
-                minubes--;
+                // Если таймер остановился, перезагружаем текущую сцену
+                int sceneIndex = SceneManager.GetActiveScene().buildIndex;
+                SceneManager.LoadScene(sceneIndex);
             }
-
         }
+
+        //Округляем значение секунд до целых для их вывода на экран
+        int roundSeconds = Mathf.RoundToInt(seconds);
+        timerText.text = minutes + ":" + roundSeconds;
     }
 }
