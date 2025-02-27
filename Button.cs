@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Button : MonoBehaviour
 {
-    public Animation button;
-    public Animation toOpen;
+    public Animator button;
+    public Animator toOpen;
     // Start is called before the first frame update
     void Start()
     {
@@ -13,7 +13,7 @@ public class Button : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter(Collider other)
     {
         button.enabled = true;
         toOpen.enabled = true;
