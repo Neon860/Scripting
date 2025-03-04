@@ -5,6 +5,7 @@ using UnityEngine;
 public class Missile : MonoBehaviour
 {
     public float speed;
+    public float enemyDamage = 2.5f;
 
     void Start()
     {
@@ -18,8 +19,8 @@ public class Missile : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Enemy enemy = other.GetComponent<Enemy>();
-        Destroy(enemy.gameObject);
         Destroy(gameObject);
+        Enemy enemy = other.GetComponent<Enemy>();
+        enemy.TakeDamage(enemyDamage);
     }
 }
