@@ -5,17 +5,43 @@ using UnityEngine;
 public class Square : MonoBehaviour
 {
     public Vector2 targetPosition;
-
+    public bool isTrap;
     public float moveStep;
+    public float speedFactor;
+    public float scaleFactor;
+    public int catchCount;
 
-    private void Start()
+    void Catch()
     {
-        targetPosition = GetRandomPoint();
+        Player.score++;
+        catchCount--;
+
+        if (catchCount == 0)
+        {
+            Player.squares.Remove(this);
+            Destroy(gameObject);
+        }
+        else
+        {
+            moveStep += speedFactor;
+            transform.localScale = (Vector2)transform.localScale - new Vector2(scaleFactor, scaleFactor);
+            transform.position = GetRandomPoint();
+        }
     }
 
-    private void Update()
+    void Start()
     {
-        transform.position = ;
+        targetPosition = GetRandomPoint();
+
+        if (isTrap == false)
+        {
+            Player.squares.Add(this);
+        }
+    }
+
+    void Update()
+    {
+        transform.position = Vector2.MoveTowards(transform.position, targetPosition, moveStep * Time.deltaTime); ;
 
         if((Vector2)transform.position == targetPosition)
         {
@@ -31,5 +57,17 @@ public class Square : MonoBehaviour
         randomVector.y = Random.Range(-3,3);
 
         return randomVector;
+    }
+
+    private void OnMouseDown()
+    {
+        if (isTrap)
+        {
+            Player.Defeat();
+        }
+        else
+        {
+            Catch();
+        }
     }
 }
