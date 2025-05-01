@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class Plaer2D_1 : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
+    public int points;
     void Update()
     {
-        
+        Move();
+    }
+
+    void Move()
+    {
+        if (Input.GetMouseButton(0))
+        {
+            Vector2 mousePos = Input.mousePosition;
+            Vector2 realPos = Camera.main.ScreenToWorldPoint(mousePos);
+            transform.position = realPos;
+        }
     }
 }
