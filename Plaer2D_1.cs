@@ -5,9 +5,25 @@ using UnityEngine;
 public class Plaer2D_1 : MonoBehaviour
 {
     public int points;
+    public float shootInstantiate;
+    public float shootTimer;
+    public Projectile projectilePrefab;
+    public Transform shootPoint;
+
+    void Shoot()
+    {  
+        if (shootTimer <= 0)
+        {
+            Instantiate(projectilePrefab, shootPoint.position, Quaternion.identity);
+            shootTimer = shootInstantiate;
+        }
+    }
+
     void Update()
     {
         Move();
+        Shoot();
+        shootTimer -= Time.deltaTime;
     }
 
     void Move()
