@@ -10,6 +10,8 @@ public class Item : MonoBehaviour
         {
             Player player = collision.GetComponent<Player>();
             player.points++;
+            GameObject effect = Instantiate(pickupEffect, transform.position, transform.rotation);
+            Destroy(effect, 5);
             Destroy(this.gameObject);
         }
     }
