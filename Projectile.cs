@@ -21,6 +21,8 @@ public class Projectile : MonoBehaviour
         if (collision.tag == "Obstacle")
         {
             Destroy(collision.gameObject);
+            GameObject effect = Instantiate(explosionAsteroid, transform.position, transform.rotation);
+            Destroy(effect, 5);
             Destroy(this.gameObject);
         }
     }
